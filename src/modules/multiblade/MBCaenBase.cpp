@@ -245,7 +245,8 @@ void CAENBase::processing_thread() {
       Counters.EventsUdder++;
 
       if (EFUSettings.TestImageUSleep != 0) {
-        usleep(EFUSettings.TestImageUSleep);
+        if (Counters.EventsUdder % 100000 == 0)
+          usleep(EFUSettings.TestImageUSleep);
       }
 
       time_of_flight++;
