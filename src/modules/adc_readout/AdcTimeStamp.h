@@ -20,8 +20,8 @@ const static std::uint64_t NSecMultiplier = 1'000'000'000;
 
 struct Timing {
   constexpr Timing(std::uint64_t const ClockFrequency)
-      : TimeClockFrequency(ClockFrequency), SamplingRate(ClockFrequency / 2),
-        AdcTimerCounterMax(SamplingRate), SampleLengthNS(2e9 / ClockFrequency) {
+      : TimeClockFrequency(ClockFrequency), SamplingRate(ClockFrequency),
+        AdcTimerCounterMax(SamplingRate), SampleLengthNS(1e9 / ClockFrequency) {
   }
   std::uint32_t const TimeClockFrequency;
   std::uint32_t const SamplingRate;
@@ -29,8 +29,9 @@ struct Timing {
   double const SampleLengthNS;
 };
 
-static constexpr Timing const TimeConst[2] = {TimerClockFrequencyInternal,
-                                              TimerClockFrequencyExternal};
+static constexpr Timing const TimeConst[3] = {TimerClockFrequencyInternal,
+                                              TimerClockFrequencyExternal,
+                                              TimerClockFrequencyExternal88Mhz};
 
 struct RawTimeStamp {
   /// \brief Number of seconds since UNIX epoch (1980-01-01 00:00).
@@ -55,7 +56,7 @@ struct RawTimeStamp {
 /// hardware.
 class TimeStamp {
 public:
-  enum class ClockMode { External = 1, Internal = 0 };
+  enum class ClockMode { External88Mhz = 2, External = 1, Internal = 0 };
   TimeStamp() = default;
 
   /// \brief Create a raw timestamp from a timestamp in nanoseconds since Unix
@@ -110,7 +111,7 @@ TimeStamp MakeExternalTimeStampFromClock(ChronoTime TimeNow) {
                        1e9) -
                       NowSeconds;
   std::uint32_t Ticks =
-      std::lround(NowSecFrac * (TimerClockFrequencyExternal / 2.0));
+      std::lround(NowSecFrac * TimerClockFrequencyExternal);
 
   RawTimeStamp rts{static_cast<uint32_t>(NowSeconds), Ticks};
   return TimeStamp(rts, TimeStamp::ClockMode::External);

@@ -162,7 +162,7 @@ TEST(SampleProcessing, SerialisationFlatbufferTest1) {
             TempModule.StartTime.getTimeStampNS());
   EXPECT_NEAR(SampleData->TimeDelta(),
               (1e9 * TempModule.OversamplingFactor) /
-                  (TimerClockFrequencyExternal / 2),
+                  TimerClockFrequencyExternal,
               0.05);
   EXPECT_EQ(SampleData->TimestampLocation(), Location::End);
   EXPECT_EQ(SampleData->Channel(), TempModule.Identifier.ChannelNr);
@@ -209,7 +209,7 @@ TEST(SampleProcessing, SerialisationFlatbufferTest3) {
             TempModule.StartTime.getTimeStampNS());
   EXPECT_NEAR(SampleData->TimeDelta(),
               (1e9 * TempModule.OversamplingFactor) /
-                  (TimerClockFrequencyExternal / 2),
+                  TimerClockFrequencyExternal,
               0.05);
   EXPECT_EQ(SampleData->TimestampLocation(), Location::End);
   EXPECT_EQ(SampleData->Channel(), TempModule.Identifier.ChannelNr);
