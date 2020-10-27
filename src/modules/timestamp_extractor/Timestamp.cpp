@@ -18,6 +18,7 @@ void Timestamp::threadFunc() {
     RawTimeStamp *TimePtr;
     if (Packet.Length >= 8) {
       TimePtr = reinterpret_cast<RawTimeStamp*>(&Packet.Data);
+      TimePtr->fixEndian();
       auto CurrentTS = TimeStamp(*TimePtr, TimeStamp::ClockMode::External88Mhz);
       auto Evt = std::make_unique<EventData>();
       Evt->Timestamp = CurrentTS.getTimeStampNS();
