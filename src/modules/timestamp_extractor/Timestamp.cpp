@@ -2,6 +2,7 @@
 #include "../adc_readout/UDPClient.h"
 #include <chrono>
 #include "../adc_readout/AdcTimeStamp.h"
+#include <common/DetectorModuleRegister.h>
 
 using std::chrono_literals::operator""ms;
 
@@ -31,3 +32,8 @@ void Timestamp::stopThreads() {
   Service->stop();
   Detector::stopThreads();
 }
+
+void CLIArguments(CLI::App &) {
+}
+
+REGISTER_MODULE(Timestamp, CLIArguments);
