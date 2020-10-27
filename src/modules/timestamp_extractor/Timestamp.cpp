@@ -16,7 +16,7 @@ Timestamp::Timestamp(const BaseSettings &Settings) : Detector("timestamp", Setti
 void Timestamp::threadFunc() {
   auto ProcessPacket = [&](auto Packet) {
     RawTimeStamp *TimePtr;
-    if (Packet.Length > 8) {
+    if (Packet.Length >= 8) {
       TimePtr = reinterpret_cast<RawTimeStamp*>(&Packet.Data);
       auto CurrentTS = TimeStamp(*TimePtr, TimeStamp::ClockMode::External88Mhz);
       auto Evt = std::make_unique<EventData>();
