@@ -1,0 +1,32 @@
+{
+  "Instrument": "Quokka",
+  "Prefix": "QKK",
+  "Reader": "bnlp",
+  "DAEComms": "udp",
+  "Detector": {
+    "BasePixel": 0,
+    "XPixels": 192,
+    "YPixels": 192,
+    "EventLag": 1000,
+    "Note1": "Max timestamp difference between successive packets (msec)",
+    "MaxMessageGap": 5000,
+    "Note2": "Event demux timeout (msec), should be larger than coarse bin width",
+    "DemuxTimeout": 100
+  },
+  "EventBinning": {
+    "Note": "",
+    "CoarseBinBits": 10,
+    "FineBinBits": 12,
+    "FineWidthBits": 10
+  },
+  "Clusters": {
+    "Note": "MaxSpan: nsec, MaxDT: nsec, MaxDY: pixels, MaxDX: tubes",
+    "Enabled": false,
+    "NumThreads": 3,
+    "ActiveClusters": 1000,
+    "MaxSpan": 1000,
+    "MaxDT": 200,
+    "MaxDX": 2,
+    "MaxDY": 2
+  }
+}

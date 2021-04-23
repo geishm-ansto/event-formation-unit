@@ -1,0 +1,16 @@
+{
+    "Instrument": "Pelican",
+    "Reader": "mcpd8",
+    "DAEComms": "udp",
+    "Simulation" : {
+        "note.1": "Generates a simpler linear pattern to test alignment",
+        "FixedPattern": false,
+        "note.2": "Define a abolute time (nsec from unix epoch), otherwise uses current time.",
+        "BaseTime": 0,
+        "note.3": "The chopper period in nsec.",
+        "FramePeriod": 1000000000,
+        "EventsPerFrame": 20000,
+        "MaxPacketSize":  1472,
+        "FrameSource": [7,0]
+    }
+}

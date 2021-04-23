@@ -1,0 +1,14 @@
+{
+  "Instrument": "Quokka",
+  "Reader": "bnlpz",
+  "DAEComms": "zmq",
+  "MaxMessageGap": 10000,
+  "MaxPixelID": 36865,
+  "ADCBits": 6,
+  "Simulation" : {
+      "BaseTime": 0,
+      "FramePeriod": 10000000,
+      "EventsPerFrame": 500,
+      "MaxPacketSize":  1472
+  }
+}

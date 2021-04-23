@@ -1,4 +1,4 @@
-FROM screamingudder/ubuntu18.04-build-node:3.0.0
+FROM screamingudder/ubuntu18.04-build-node:3.0.0 AS buildstage
 
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -23,8 +23,16 @@ COPY src efu_src/src
 COPY CMakeLists.txt LICENSE README.md efu_src/
 
 RUN cd efu && \
-    cmake -DCONAN="MANUAL" ../efu_src && \
+    cmake -DCMAKE_BUILD_TYPE="Release" -DCONAN="MANUAL" ../efu_src && \
     make -j4
 
+FROM ubuntu:18.04
+
+RUN mkdir efu
+COPY --from=buildstage /home/jenkins/efu/bin/efu efu/bin/
+COPY --from=buildstage /home/jenkins/efu/modules/ansto.so efu/modules/
+COPY --from=buildstage /home/jenkins/efu/lib/ efu/lib/
+COPY --from=buildstage /usr/lib/x86_64-linux-gnu/libgomp.so.1 efu/lib
+ENV LD_LIBRARY_PATH=/efu/lib:$LD_LIBRARY_PATH
 COPY docker_launch.sh .
 CMD ["./docker_launch.sh"]

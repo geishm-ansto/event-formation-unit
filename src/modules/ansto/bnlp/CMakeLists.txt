@@ -1,0 +1,12 @@
+set(AMBnlpParserTest_INC
+  BnlpParser.h
+  ../common/Readout.h
+  ../common/Config.h
+  ../common/ParserFactory.h)
+set(AMBnlpParserTest_SRC
+  BnlpParser.cpp
+  ../common/Readout.cpp
+  ../common/Config.cpp
+  ../common/ParserFactory.cpp
+  BnlpParserTest.cpp)
+create_test_executable(AMBnlpParserTest)

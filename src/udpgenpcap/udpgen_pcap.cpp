@@ -21,6 +21,7 @@
 struct {
   std::string FileName{""};
   std::string IpAddress{"127.0.0.1"};
+  std::string Filter{"ip and udp"};
   uint16_t UDPPort{9000};
   uint64_t NumberOfPackets{0}; // 0 == all packets
   uint64_t SpeedThrottle{0}; // 0 is fastest higher is slower
@@ -42,6 +43,7 @@ int main(int argc, char *argv[]) {
   app.add_option("-a, --packets", Settings.NumberOfPackets, "Number of packets to send");
   app.add_option("-t, --throttle", Settings.SpeedThrottle, "Speed throttle (0 is fastest, larger is slower)");
   app.add_option("-s, --pkt_throttle", Settings.PktThrottle, "Extra usleep() after n packets");
+  app.add_option("-k, --filter", Settings.Filter, "PCAP filter string");
   app.add_flag("-r, --read_only", Settings.Read, "Read pcap file and return stats");
   app.add_flag("-l, --loop", Settings.Loop, "Run forever");
   app.add_flag("-m, --multicast", Settings.Multicast, "Allow IP multicast");
@@ -67,7 +69,7 @@ int main(int argc, char *argv[]) {
 
   std::string PcapFile(Settings.FileName);
 
-  ReaderPcap Pcap(PcapFile);
+  ReaderPcap Pcap(PcapFile, Settings.Filter);
   if (Pcap.open() < 0) {
     printf("Error opening file: %s\n", PcapFile.c_str());
     return -1;
@@ -88,7 +90,7 @@ int main(int argc, char *argv[]) {
     int ReadSize;
     while ((ReadSize = Pcap.read((char *)&RxBuffer, sizeof(RxBuffer))) != -1) {
       if (ReadSize == 0) {
-        printf("read non udp data - ignoring\n");
+        //printf("read non udp data - ignoring\n");
         continue; // non udp data
       }
       PcapPackets++;

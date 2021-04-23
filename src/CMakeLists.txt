@@ -19,6 +19,7 @@ find_package(h5cpp REQUIRED)
 find_package(PCAP REQUIRED)
 find_package(asio REQUIRED)
 find_package(jsonformoderncpp REQUIRED)
+find_package(zmq REQUIRED)
 
 set(EFU_COMMON_LIBS
   ${CMAKE_DL_LIBS}
@@ -30,6 +31,7 @@ set(EFU_COMMON_LIBS
   GraylogLogger::graylog_logger_static
   fmt::fmt
   h5cpp::h5cpp
+  zmq::zmq
   )
 
 set(EFU_COMMON_LIBS ${EFU_COMMON_LIBS} PARENT_SCOPE)
@@ -48,6 +50,7 @@ get_filename_component(GDGEM_CFG_FILE "${ESS_MODULE_DIR}/gdgem/configs/vmm3.json
 get_filename_component(JALOUSIE_CFG_FILE "${ESS_MODULE_DIR}/jalousie/configs/v20_mappings.json" ABSOLUTE)
 get_filename_component(JALOUSIE_CSV_FILE "${ESS_MODULE_DIR}/jalousie/configs/sumo_voxel_map_20190711.csv" ABSOLUTE)
 get_filename_component(LOKI_CFG_FILE "${ESS_MODULE_DIR}/loki/configs/STFCTest.json" ABSOLUTE)
+get_filename_component(ANSTO_CFG_FILE "${ESS_MODULE_DIR}/ansto/configs/pelican.json" ABSOLUTE)
 
 add_custom_target(copycfgs
     COMMAND ${CMAKE_COMMAND} -E make_directory ${PROJECT_BINARY_DIR}/configs
@@ -58,6 +61,7 @@ add_custom_target(copycfgs
     COMMAND ${CMAKE_COMMAND} -E copy ${JALOUSIE_CFG_FILE} ${PROJECT_BINARY_DIR}/configs/
     COMMAND ${CMAKE_COMMAND} -E copy ${JALOUSIE_CSV_FILE} ${PROJECT_BINARY_DIR}/configs/
     COMMAND ${CMAKE_COMMAND} -E copy ${LOKI_CFG_FILE} ${PROJECT_BINARY_DIR}/configs/
+    COMMAND ${CMAKE_COMMAND} -E copy ${ANSTO_CFG_FILE} ${PROJECT_BINARY_DIR}/configs/
     COMMENT "Copying json configuration files to ${PROJECT_BINARY_DIR}/configs"
 )
 

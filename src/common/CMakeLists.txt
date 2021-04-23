@@ -10,6 +10,8 @@ set(efu_common_SRC
   DetectorModuleRegister.cpp
   EFUArgs.cpp
   EV42Serializer.cpp
+  TDCTSerializer.cpp
+  SENVSerializer.cpp
   Statistics.cpp
   Producer.cpp
   Socket.cpp
@@ -17,6 +19,7 @@ set(efu_common_SRC
   Timer.cpp
   TimeString.cpp
   TSCTimer.cpp
+  ZmqInput.cpp
   )
 
 set(efu_common_INC
@@ -29,6 +32,8 @@ set(efu_common_INC
   DumpFile.h
   EFUArgs.h
   EV42Serializer.h
+  TDCTSerializer.h
+  SENVSerializer.h
   Expect.h
   FixedSizePool.h
   JsonFile.h
@@ -46,6 +51,7 @@ set(efu_common_INC
   Trace.h
   TraceGroups.h
   TSCTimer.h
+  ZmqInput.h
   ${VERSION_INCLUDE_DIR}/common/version_num.h
   ${VERSION_INCLUDE_DIR}/common/Version.h
   )

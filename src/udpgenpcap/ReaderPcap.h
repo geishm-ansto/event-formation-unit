@@ -18,7 +18,7 @@ class ReaderPcap {
 public:
   /// \brief construct a reader for a specific file
   /// \param filename name of pcap file
-  ReaderPcap(std::string FileName);
+  ReaderPcap(std::string FileName, std::string Filter="ip and udp");
 
   /// closes pcap handle
   ~ReaderPcap();
@@ -52,7 +52,7 @@ public:
   } Stats;
 
 private:
-  const char * FilterUdp = "ip and udp";
+  std::string FilterUdp;
   struct bpf_program PcapFilter;
 
   /// \brief checking consistency and updating stats

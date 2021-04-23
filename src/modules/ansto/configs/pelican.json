@@ -1,0 +1,44 @@
+{
+    "Instrument": "Pelican",
+    "Prefix": "PLN",
+    "Reader": "mcpd8",
+    "DAEComms": "udp",
+    "Detector": {
+        "Note1": "PixelID = x * YPixels + y + BasePixel",
+        "BasePixel": 0,
+        "XPixels": 216,
+        "YPixels": 1024,
+        "Note2": "EventLag is a potential delay in receiving coincident events (msec)",
+        "EventLag": 500,
+        "Note2.1" : "TOFMode requires a primary chopper signal, reduce the KafkaEventSize for fast rates. MinTOF (usec)",
+        "TOFMode" : false,
+        "MinTOF" : 3000,
+        "KafkaNeutronEvents": 124000,
+        "Note3": "MaxMessageGap is the min time difference between successive msgs to reset abs. time (msec)",
+        "MaxMessageGap": 10000,
+        "Note4": "Event demux timeout (msec), should be larger than coarse bin width",
+        "DemuxTimeout": 100,
+        "TriggerSource": {
+            "FrameStart": [
+                7,
+                0
+            ]
+        }
+    },
+    "EventBinning": {
+        "Note": "",
+        "CoarseBinBits": 10,
+        "FineBinBits": 12,
+        "FineWidthBits": 10
+    },
+    "Clusters": {
+        "Note": "MaxSpan: nsec, MaxDT: nsec, MaxDY: pixels, MaxDX: tubes",
+        "Enabled": true,
+        "NumThreads": 3,
+        "ActiveClusters": 1000,
+        "MaxSpan": 1000,
+        "MaxDT": 300,
+        "MaxDX": 1,
+        "MaxDY": 2
+    }
+}

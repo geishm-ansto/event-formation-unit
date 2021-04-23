@@ -30,8 +30,8 @@ const int IP_HEADR_OFFSET = ETHERNET_HEADER_SIZE;
 const int UDP_HEADER_OFFSET = IP_HEADR_OFFSET + IP_HEADER_SIZE;
 const int UDP_DATA_OFFSET = UDP_HEADER_OFFSET + UDP_HEADER_SIZE;
 
-ReaderPcap::ReaderPcap(std::string FileName)
-  : FileName(FileName) {
+ReaderPcap::ReaderPcap(std::string FileName, std::string Filter)
+  : FilterUdp(Filter), FileName(FileName) {
   memset(&Stats, 0, sizeof(stats_t));
 }
 
@@ -50,7 +50,7 @@ int ReaderPcap::open() {
     return -1;
   }
 
-  if (pcap_compile(PcapHandle, &PcapFilter, FilterUdp, 1, PCAP_NETMASK_UNKNOWN) == -1) {
+  if (pcap_compile(PcapHandle, &PcapFilter, FilterUdp.c_str(), 1, PCAP_NETMASK_UNKNOWN) == -1) {
     return -1;
   }
 

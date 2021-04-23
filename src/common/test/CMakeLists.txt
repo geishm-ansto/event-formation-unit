@@ -36,6 +36,16 @@ set(EV42SerializerTest_SRC
   )
 create_test_executable(EV42SerializerTest)
 
+set(TDCTSerializerTest_SRC
+  TDCTSerializerTest.cpp
+  )
+create_test_executable(TDCTSerializerTest)
+
+set(SENVSerializerTest_SRC
+  SENVSerializerTest.cpp
+  )
+create_test_executable(SENVSerializerTest)
+
 set(StatisticsTest_SRC
     StatisticsTest.cpp
   )

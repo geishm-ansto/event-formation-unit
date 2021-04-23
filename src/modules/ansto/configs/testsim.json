@@ -1,0 +1,13 @@
+{
+    "Instrument": "Pelican",
+    "Reader": "mcpd8",
+    "DAEComms": "udp",
+    "Simulation" : {
+        "FixedPattern": true,
+        "BaseTime": 0,
+        "FramePeriod": 10000000,
+        "EventsPerFrame": 500,
+        "MaxPacketSize":  1472,
+        "FrameSource": [7,0]
+    }
+}

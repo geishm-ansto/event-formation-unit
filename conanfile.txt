@@ -14,6 +14,7 @@ readerwriterqueue/07e22ec@ess-dmsc/stable
 concurrentqueue/8f7e861@ess-dmsc/stable
 streaming-data-types/416487f@ess-dmsc/stable
 trompeloeil/39
+zmq/4.3.2@bincrafters/stable
 
 [generators]
 cmake
