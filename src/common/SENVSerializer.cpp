@@ -81,6 +81,7 @@ SENVSerializer<DataType, ValueType, ValueBuilder>::SENVSerializer(
                   1;
 
   SampleEnvironmentData_->mutate_MessageCounter(0);
+  SampleEnvironmentData_->mutate_PacketTimestamp(0);
   SampleEnvironmentData_->mutate_Channel(0);
   SampleEnvironmentData_->mutate_TimeDelta(0.0);
 }
@@ -122,17 +123,6 @@ size_t SENVSerializer<DataType, ValueType, ValueBuilder>::produce() {
     return Buffer_.size_bytes();
   }
   return 0;
-}
-
-template <typename DataType, typename ValueType, typename ValueBuilder>
-size_t SENVSerializer<DataType, ValueType, ValueBuilder>::eventCount() const {
-  return EventCount;
-}
-
-template <typename DataType, typename ValueType, typename ValueBuilder>
-uint64_t
-SENVSerializer<DataType, ValueType, ValueBuilder>::currentMessageId() const {
-  return MessageId;
 }
 
 template <typename DataType, typename ValueType, typename ValueBuilder>

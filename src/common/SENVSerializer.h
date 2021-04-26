@@ -14,8 +14,6 @@
 #include "flatbuffers/flatbuffers.h"
 #include "senv_data_generated.h"
 
-struct SampleEnvironmentData;
-
 template <typename DataType, typename ValueType, typename ValueBuilder>
 class SENVSerializer {
 public:
@@ -38,10 +36,52 @@ public:
   size_t addEvent(uint64_t Time, DataType Value);
 
   /// \brief returns event count
-  size_t eventCount() const;
+  size_t eventCount() const { return EventCount; }
 
   /// \returns current message counter
-  uint64_t currentMessageId() const;
+  uint64_t getMessageId() const {
+    return MessageId;
+  }
+
+  /// \returns current timestamp location
+  Location getTimestampLocation() const {
+    return SampleEnvironmentData_->TimestampLocation();
+  }
+
+  /// \brief sets the current timestamp location
+  /// \param Value location value
+  void setTimestampLocation(Location Value) {
+    SampleEnvironmentData_->mutate_TimestampLocation(Value);
+  }
+
+  /// \returns returns the current channel
+  int32_t getChannel() const { return SampleEnvironmentData_->Channel(); }
+
+  /// \brief sets the current channel Id
+  /// \param ChannelId new channel id
+  void setChannel(int32_t ChannelId) {
+    SampleEnvironmentData_->mutate_Channel(ChannelId);
+  }
+
+  /// \returns returns the current time delta
+  double getTimeDelta() const { return SampleEnvironmentData_->TimeDelta(); }
+
+  /// \brief sets the current time delta
+  /// \param Value new time delta value
+  void setTimeDelta(double Value) {
+    SampleEnvironmentData_->mutate_TimeDelta(Value);
+  }
+
+  /// \returns returns the current packet timestamp
+  uint64_t getPacketTimestamp() const {
+    return SampleEnvironmentData_->PacketTimestamp();
+  }
+
+  /// \brief sets the current packet timestamp
+  /// \param Value new packet timestamp value
+  void setPacketTimestamp(uint64_t Value) {
+    SampleEnvironmentData_->mutate_PacketTimestamp(Value);
+  }
 
   /// \brief serializes and sends to producer
   /// \returns bytes transmitted

@@ -74,6 +74,21 @@ TEST_F(SENVSerializerTest, DeserializeCheckData16) {
     ASSERT_EQ(fb.eventCount(), i+1);
   }
 
+  constexpr uint32_t CChannelId{23};
+  constexpr Location CLocation{Location::Middle};
+  constexpr uint64_t CPacketTS{123456};
+  constexpr double CTimeDelta{7.0};
+
+  fb.setChannel(CChannelId);
+  fb.setPacketTimestamp(CPacketTS);
+  fb.setTimestampLocation(CLocation);
+  fb.setTimeDelta(CTimeDelta);
+
+  EXPECT_EQ(fb.getChannel(), CChannelId);
+  EXPECT_EQ(fb.getPacketTimestamp(), CPacketTS);
+  EXPECT_EQ(fb.getTimestampLocation(), CLocation);
+  EXPECT_EQ(fb.getTimeDelta(), CTimeDelta);
+
   auto buffer = fb.serialize();
   ASSERT_TRUE(not buffer.empty());
 
@@ -96,6 +111,11 @@ TEST_F(SENVSerializerTest, DeserializeCheckData16) {
   }
 
   EXPECT_EQ(events->Name()->str(), "nameless");
+  EXPECT_EQ(events->Channel(), CChannelId);
+  EXPECT_EQ(events->PacketTimestamp(), CPacketTS);
+  EXPECT_EQ(events->TimestampLocation(), CLocation);
+  EXPECT_EQ(events->TimeDelta(), CTimeDelta);
+  EXPECT_EQ(events->Name()->str(), "nameless");
 }
 
 TEST_F(SENVSerializerTest, DeserializeCheckData64) {
@@ -105,6 +125,21 @@ TEST_F(SENVSerializerTest, DeserializeCheckData64) {
     ASSERT_EQ(len, 0);
     ASSERT_EQ(fb.eventCount(), i+1);
   }
+
+  constexpr uint32_t CChannelId{23};
+  constexpr Location CLocation{Location::Middle};
+  constexpr uint64_t CPacketTS{123456};
+  constexpr double CTimeDelta{7.0};
+
+  fb.setChannel(CChannelId);
+  fb.setPacketTimestamp(CPacketTS);
+  fb.setTimestampLocation(CLocation);
+  fb.setTimeDelta(CTimeDelta);
+
+  EXPECT_EQ(fb.getChannel(), CChannelId);
+  EXPECT_EQ(fb.getPacketTimestamp(), CPacketTS);
+  EXPECT_EQ(fb.getTimestampLocation(), CLocation);
+  EXPECT_EQ(fb.getTimeDelta(), CTimeDelta);
 
   auto buffer = fb.serialize();
   ASSERT_TRUE(not buffer.empty());
@@ -128,6 +163,11 @@ TEST_F(SENVSerializerTest, DeserializeCheckData64) {
   }
 
   EXPECT_EQ(events->Name()->str(), "nameless");
+  EXPECT_EQ(events->Channel(), CChannelId);
+  EXPECT_EQ(events->PacketTimestamp(), CPacketTS);
+  EXPECT_EQ(events->TimestampLocation(), CLocation);
+  EXPECT_EQ(events->TimeDelta(), CTimeDelta);
+
 }
 
 TEST_F(SENVSerializerTest, AutoDeserialize) {
