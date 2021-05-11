@@ -1,4 +1,4 @@
-FROM screamingudder/ubuntu18.04-build-node:3.0.0 AS buildstage
+FROM screamingudder/ubuntu18.04-build-node:4.0.1 AS buildstage
 
 ENV DEBIAN_FRONTEND=noninteractive
 
